@@ -5,11 +5,13 @@ const VideoList = ({ videos }) => (
   <Grid
     container
     spacing={4}
-    sx={{
-      width: '100%',
-      justifyContent: 'flex-start',
-      px: 4,
-    }}
+  sx={{
+  width: '100%',
+  justifyContent: 'flex-start',
+  px: 4,
+  bgcolor: '#181818', // Add this
+}}
+
   >
     {videos.map((video) => (
       <Grid

@@ -1,20 +1,24 @@
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import { Box, Typography, CircularProgress, Divider } from '@mui/material';
 import { videos } from '../data/videos';
-import { Typography, Box, CircularProgress } from '@mui/material';
+import VideoList from '../components/VideoList';
 
 const VideoDetail = () => {
   const { id } = useParams();
   const [video, setVideo] = useState(null);
+  const [related, setRelated] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Simulate fetch delay
+    const found = videos.find((v) => v.id === id);
+    const others = videos.filter((v) => v.id !== id);
+
     setTimeout(() => {
-      const foundVideo = videos.find((v) => v.id === id);
-      setVideo(foundVideo);
+      setVideo(found);
+      setRelated(others);
       setLoading(false);
-    }, 800); // Adjust as needed
+    }, 500); // simulate loading
   }, [id]);
 
   if (loading) {
@@ -34,21 +38,43 @@ const VideoDetail = () => {
   }
 
   return (
-    <Box p={4}>
-      <img
-        src={video.thumbnail}
-        alt={video.title}
-        style={{ width: '100%', maxHeight: '400px', objectFit: 'cover' }}
-      />
-      <Typography variant="h4" mt={2}>
-        {video.title}
-      </Typography>
+    <Box sx={{ p: 4 }}>
+      <Box
+        sx={{
+          position: 'relative',
+          paddingTop: '56.25%', // 16:9 aspect ratio
+          mb: 3,
+        }}
+      >
+        <iframe
+          src={`https://www.youtube.com/embed/${video.videoId}`}
+          title={video.title}
+          frameBorder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            borderRadius: '10px',
+          }}
+        ></iframe>
+      </Box>
+
+      <Typography variant="h4" gutterBottom>{video.title}</Typography>
       <Typography variant="subtitle1" color="text.secondary">
-        {video.channel}
+        {video.channel} • {video.views} views
       </Typography>
-      <Typography variant="body1" mt={2}>
+      <Typography variant="body1" mt={2} mb={4}>
         {video.description}
       </Typography>
+
+      <Divider sx={{ my: 4 }} />
+
+      <Typography variant="h5" mb={2}>Related Videos</Typography>
+      <VideoList videos={related} />
     </Box>
   );
 };

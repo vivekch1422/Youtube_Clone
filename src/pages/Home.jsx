@@ -1,56 +1,68 @@
-import { useState, useEffect } from 'react';
-import { Box, TextField, Typography } from '@mui/material';
+import { useState } from 'react';
+import { Box, TextField, Typography, Button, Stack } from '@mui/material';
 import { videos } from '../data/videos';
 import VideoList from '../components/VideoList';
 
-const Home = () => {
-  const [search, setSearch] = useState('');
-  const [filteredVideos, setFilteredVideos] = useState(videos);
+const categories = ['All', 'Tech', 'Music', 'Gaming', 'Education', 'Travel', 'News'];
 
-  useEffect(() => {
-    const filtered = videos.filter(
-      (video) =>
-        video.title.toLowerCase().includes(search.toLowerCase()) ||
-        video.channel.toLowerCase().includes(search.toLowerCase())
-    );
-    setFilteredVideos(filtered);
-  }, [search]);
+const Home = ({ selectedCategory, search, setSearch }) => {
+  const filteredVideos = videos.filter((video) => {
+    const matchesSearch =
+      video.title.toLowerCase().includes(search.toLowerCase()) ||
+      video.channel.toLowerCase().includes(search.toLowerCase());
+
+    const matchesCategory =
+      selectedCategory === 'All' ||
+      (selectedCategory === 'Trending' && parseFloat(video.views) > 2) ||
+      (selectedCategory === 'Library' && video.category === 'Tech') || // simulate
+      (selectedCategory === 'Subscriptions' && video.channel === 'IGN') ||
+      video.category === selectedCategory;
+
+    return matchesSearch && matchesCategory;
+  });
 
   return (
-    <Box
-      sx={{
-        width: '100vw',
-        px: 4,
-        mt: 4,
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-      }}
-    >
-      <Box mb={3} sx={{ width: '100%', maxWidth: '1000px' }}>
-        <TextField
-          fullWidth
-          label="Search by title or channel"
-          variant="outlined"
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          sx={{
-            bgcolor: 'white',
-            borderRadius: 1,
-            input: { color: 'black' },
-          }}
-        />
-      </Box>
+    <Box sx={{ flex: 1, p: 3, bgcolor: '#181818' }}>
+      {/* Search */}
+      <TextField
+        fullWidth
+        label="Search by title or channel"
+        variant="outlined"
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
+        sx={{
+          bgcolor: 'white',
+          borderRadius: 1,
+          mb: 3,
+          input: { color: 'black' },
+        }}
+      />
 
-      <Box sx={{ width: '100%' }}>
-        {filteredVideos.length > 0 ? (
-          <VideoList videos={filteredVideos} />
-        ) : (
-          <Typography variant="h6" textAlign="center" mt={4}>
-            No videos found.
-          </Typography>
-        )}
-      </Box>
+      {/* Category Chips */}
+      <Stack direction="row" spacing={2} mb={3}>
+        {categories.map((cat) => (
+          <Button
+            key={cat}
+            variant={selectedCategory === cat ? 'contained' : 'outlined'}
+            color="primary"
+            onClick={() => {
+              setSearch('');
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
+          >
+            {cat}
+          </Button>
+        ))}
+      </Stack>
+
+      {/* Videos */}
+      {filteredVideos.length > 0 ? (
+        <VideoList videos={filteredVideos} />
+      ) : (
+        <Typography variant="h6" textAlign="center" mt={4} color="white">
+          No videos found.
+        </Typography>
+      )}
     </Box>
   );
 };
