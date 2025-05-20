@@ -4,6 +4,7 @@ import VideoCard from './VideoCard';
 const VideoList = ({ videos }) => (
   <Grid
     container
+<<<<<<< HEAD
     spacing={3}
     sx={{
       width: '100%',
@@ -22,6 +23,28 @@ const VideoList = ({ videos }) => (
         lg={3}
         xl={2.4}
         sx={{
+=======
+    spacing={4}
+  sx={{
+  width: '100%',
+  justifyContent: 'flex-start',
+  px: 4,
+  bgcolor: '#181818', // Add this
+}}
+
+  >
+    {videos.map((video) => (
+      <Grid
+        key={video.id}
+        sx={{
+          flexBasis: {
+            xs: '100%',
+            sm: '48%',
+            md: '31%',
+            lg: '23%',
+          },
+          flexGrow: 1,
+>>>>>>> fac1f91be537984dc039803532b170922a590033
           display: 'flex',
         }}
       >
