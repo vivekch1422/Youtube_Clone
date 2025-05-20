@@ -6,7 +6,7 @@ import Footer from './components/Footer';
 import Sidebar from './components/Sidebar';
 import Home from './pages/Home';
 import VideoDetail from './pages/VideoDetail';
-import Channel from './pages/Channel'; // ✅ NEW
+import Channel from './pages/Channel';
 import NotFound from './pages/NotFound';
 
 function App() {
@@ -48,7 +48,7 @@ function App() {
               }
             />
             <Route path="/video/:id" element={<VideoDetail />} />
-            <Route path="/channel/:name" element={<Channel />} /> {/* ✅ NEW */}
+            <Route path="/channel/:name" element={<Channel />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Box>

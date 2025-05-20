@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import {
   Card,
   CardContent,
@@ -8,18 +7,12 @@ import {
   Stack,
   Avatar,
 } from '@mui/material';
-=======
-import { Card, CardContent, Typography, CardMedia } from '@mui/material';
->>>>>>> fac1f91be537984dc039803532b170922a590033
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 
 const VideoCard = ({ video }) => {
   const [hovered, setHovered] = useState(false);
-<<<<<<< HEAD
-  const videoDuration = '10:12'; // Simulated
-=======
->>>>>>> fac1f91be537984dc039803532b170922a590033
+  const videoDuration = '10:12'; // Simulated duration
 
   return (
     <Card
@@ -27,16 +20,10 @@ const VideoCard = ({ video }) => {
         bgcolor: '#181818',
         color: 'white',
         boxShadow: 'none',
-<<<<<<< HEAD
         borderRadius: 2,
         transition: 'transform 0.3s',
         '&:hover': {
           transform: 'scale(1.02)',
-=======
-        '&:hover': {
-          transform: 'scale(1.02)',
-          transition: 'transform 0.3s',
->>>>>>> fac1f91be537984dc039803532b170922a590033
         },
       }}
     >
@@ -48,19 +35,10 @@ const VideoCard = ({ video }) => {
           display: 'block',
         }}
       >
-<<<<<<< HEAD
-        {/* Thumbnail Preview */}
         <Box
           sx={{
             width: '100%',
             height: 180,
-=======
-        {/* Preview Area */}
-        <div
-          style={{
-            width: '100%',
-            height: '180px',
->>>>>>> fac1f91be537984dc039803532b170922a590033
             position: 'relative',
             borderRadius: '10px',
             overflow: 'hidden',
@@ -81,11 +59,7 @@ const VideoCard = ({ video }) => {
                 left: 0,
                 width: '100%',
                 height: '100%',
-<<<<<<< HEAD
                 pointerEvents: 'none',
-=======
-                pointerEvents: 'none', // 👈 allows clicks to pass through iframe
->>>>>>> fac1f91be537984dc039803532b170922a590033
               }}
             />
           ) : (
@@ -97,9 +71,7 @@ const VideoCard = ({ video }) => {
               sx={{ borderRadius: '10px' }}
             />
           )}
-<<<<<<< HEAD
 
-          {/* Duration Overlay */}
           {!hovered && (
             <Box
               sx={{
@@ -120,7 +92,6 @@ const VideoCard = ({ video }) => {
         </Box>
       </Link>
 
-      {/* Info Section */}
       <CardContent sx={{ px: 0, pt: 1.5 }}>
         <Stack direction="row" spacing={1} alignItems="flex-start">
           <Link to={`/channel/${video.channel}`}>
@@ -154,23 +125,6 @@ const VideoCard = ({ video }) => {
           </Box>
         </Stack>
       </CardContent>
-=======
-        </div>
-
-        {/* Info */}
-        <CardContent sx={{ px: 0 }}>
-          <Typography variant="subtitle1" fontWeight="bold" gutterBottom noWrap>
-            {video.title}
-          </Typography>
-          <Typography variant="subtitle2" color="gray" noWrap>
-            {video.channel}
-          </Typography>
-          <Typography variant="caption" color="gray">
-            {video.views} • {video.category}
-          </Typography>
-        </CardContent>
-      </Link>
->>>>>>> fac1f91be537984dc039803532b170922a590033
     </Card>
   );
 };

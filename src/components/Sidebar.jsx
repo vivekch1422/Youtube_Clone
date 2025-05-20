@@ -1,5 +1,4 @@
 import React from 'react';
-<<<<<<< HEAD
 import {
   Box,
   Stack,
@@ -9,23 +8,15 @@ import {
   Typography,
   Drawer,
 } from '@mui/material';
-=======
-import { Box, Stack, Button, useMediaQuery } from '@mui/material';
->>>>>>> fac1f91be537984dc039803532b170922a590033
 import { useNavigate } from 'react-router-dom';
 import HomeIcon from '@mui/icons-material/Home';
 import WhatshotIcon from '@mui/icons-material/Whatshot';
 import SubscriptionsIcon from '@mui/icons-material/Subscriptions';
 import VideoLibraryIcon from '@mui/icons-material/VideoLibrary';
 
-<<<<<<< HEAD
 const drawerWidth = 220;
 
 const SidebarContent = ({ setSelectedCategory, setSearch, handleDrawerToggle }) => {
-=======
-const Sidebar = ({ setSelectedCategory, setSearch }) => {
-  const isSmallScreen = useMediaQuery('(max-width:768px)');
->>>>>>> fac1f91be537984dc039803532b170922a590033
   const navigate = useNavigate();
 
   const items = [
@@ -38,10 +29,9 @@ const Sidebar = ({ setSelectedCategory, setSearch }) => {
   const handleClick = (category) => {
     setSelectedCategory(category);
     setSearch('');
-<<<<<<< HEAD
     navigate('/');
     window.scrollTo({ top: 0, behavior: 'smooth' });
-    if (handleDrawerToggle) handleDrawerToggle(); // Close drawer
+    if (handleDrawerToggle) handleDrawerToggle();
   };
 
   return (
@@ -77,48 +67,12 @@ const Sidebar = ({ setSelectedCategory, setSearch }) => {
               <Typography variant="body2">{item.label}</Typography>
             </Button>
           </Tooltip>
-=======
-    navigate('/'); // ✅ route back to Home page
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
-  if (isSmallScreen) return null;
-
-  return (
-    <Box
-      sx={{
-        width: 200,
-        height: '100vh',
-        position: 'sticky',
-        top: 0,
-        bgcolor: '#212121',
-        color: 'white',
-        px: 2,
-        py: 3,
-      }}
-    >
-      <Stack spacing={2}>
-        {items.map((item) => (
-          <Button
-            key={item.label}
-            startIcon={item.icon}
-            onClick={() => handleClick(item.category)}
-            sx={{
-              justifyContent: 'flex-start',
-              color: 'white',
-              textTransform: 'none',
-            }}
-          >
-            {item.label}
-          </Button>
->>>>>>> fac1f91be537984dc039803532b170922a590033
         ))}
       </Stack>
     </Box>
   );
 };
 
-<<<<<<< HEAD
 const Sidebar = ({
   setSelectedCategory,
   setSearch,
@@ -161,6 +115,4 @@ const Sidebar = ({
   );
 };
 
-=======
->>>>>>> fac1f91be537984dc039803532b170922a590033
 export default Sidebar;
